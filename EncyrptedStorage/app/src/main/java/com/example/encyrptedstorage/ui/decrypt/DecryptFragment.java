@@ -10,13 +10,30 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.encyrptedstorage.R;
+import com.example.encyrptedstorage.dagger.module.DecryptModule;
+import com.example.encyrptedstorage.ui.SecurityApp;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DecryptFragment extends Fragment {
+public class DecryptFragment extends Fragment implements DecryptContract.DView {
     @BindView(R.id.decrypt_recycle)
     RecyclerView recyclerView;
+
+    @Inject
+    DecryptContract.DPresenter presenter;
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ((SecurityApp)getActivity().getApplication())
+                .getAppComponent()
+                .newDecryptComponent(new DecryptModule(this))
+                .inject(this);
+    }
 
     @Nullable
     @Override
