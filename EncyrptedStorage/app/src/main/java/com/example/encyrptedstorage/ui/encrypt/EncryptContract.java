@@ -9,6 +9,6 @@ public interface EncryptContract {
     }
 
     public interface EPresenter extends BasePresenter<EView>{
-
+        void encrypt(String encryptionString);
     }
 }

@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.encyrptedstorage.R;
 import com.example.encyrptedstorage.dagger.module.DecryptModule;
@@ -41,5 +42,10 @@ public class DecryptFragment extends Fragment implements DecryptContract.DView {
         View view = inflater.inflate(R.layout.fragment_decrypt, container, false);
         ButterKnife.bind(this,view);
         return view;
+    }
+
+    @Override
+    public void sendError(String s) {
+        Toast.makeText(getActivity(), s, Toast.LENGTH_SHORT).show();
     }
 }

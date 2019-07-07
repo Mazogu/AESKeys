@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.encyrptedstorage.R;
 import com.example.encyrptedstorage.dagger.module.EncryptModule;
@@ -17,6 +18,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class EncryptFragment extends Fragment implements EncryptContract.EView{
 
@@ -41,5 +43,16 @@ public class EncryptFragment extends Fragment implements EncryptContract.EView{
         View view = inflater.inflate(R.layout.fragment_encrypt,container,false);
         ButterKnife.bind(this, view);
         return view;
+    }
+
+    @OnClick(R.id.encrypt_button)
+    public void sendData(){
+        String encryptionString = encryption.getText().toString();
+        presenter.encrypt(encryptionString);
+    }
+
+    @Override
+    public void sendError(String s) {
+        Toast.makeText(getActivity(), s, Toast.LENGTH_SHORT).show();
     }
 }

@@ -19,7 +19,7 @@ import javax.crypto.KeyGenerator;
 
 public class KeyStoreWrapper {
     private static final String MY_ALGORITHM = "AES";
-    private static final String KEYSTORE_PROVIDER = "AndroidKeyStoreProvider";
+    private static final String KEYSTORE_PROVIDER = "AndroidKeyStore";
     private KeyStore keyStore;
     private KeyGenerator generator;
 
@@ -32,7 +32,8 @@ public class KeyStoreWrapper {
         generator = KeyGenerator.getInstance(MY_ALGORITHM, KEYSTORE_PROVIDER);
         KeyGenParameterSpec spec = new KeyGenParameterSpec.Builder(alias, KeyProperties.PURPOSE_ENCRYPT
                 | KeyProperties.PURPOSE_DECRYPT)
-                .setBlockModes(KeyProperties.BLOCK_MODE_ECB)
+                .setBlockModes(KeyProperties.BLOCK_MODE_GCM)
+                .setRandomizedEncryptionRequired(false)
                 .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_NONE)
                 .build();
         generator.init(spec);

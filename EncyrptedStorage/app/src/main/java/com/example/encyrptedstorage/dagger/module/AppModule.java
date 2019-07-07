@@ -32,13 +32,7 @@ public class AppModule {
     KeyStoreWrapper providesKeyStoreWrapper(){
         try {
             return new KeyStoreWrapper();
-        } catch (KeyStoreException e) {
-            e.printStackTrace();
-        } catch (CertificateException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (KeyStoreException | CertificateException | NoSuchAlgorithmException | IOException e) {
             e.printStackTrace();
         }
         return null;
