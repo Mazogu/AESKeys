@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">EncyrptedStorage</string>
+    <string name="text_hint">Enter Text</string>
+    <string name="button_text">Submit</string>
+</resources>
