@@ -8,6 +8,9 @@ import com.example.encyrptedstorage.ui.encrypt.EncryptFragment;
 import dagger.Component;
 import dagger.Subcomponent;
 
+/**
+ * Sends the provides to the Encryption Fragment.
+ */
 @EncryptScope
 @Subcomponent(modules = {EncryptModule.class})
 public interface EncryptComponent {

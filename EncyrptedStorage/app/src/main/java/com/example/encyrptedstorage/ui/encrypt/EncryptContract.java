@@ -4,11 +4,15 @@ import com.example.encyrptedstorage.ui.BasePresenter;
 import com.example.encyrptedstorage.ui.BaseView;
 
 public interface EncryptContract {
-    public interface EView extends BaseView{
+    interface EView extends BaseView{
 
     }
 
-    public interface EPresenter extends BasePresenter<EView>{
+    interface EPresenter extends BasePresenter<EView>{
+        /**
+         * Sends plaintext to be encrypted through the presenter.
+         * @param encryptionString Plain text to be encrypted.
+         */
         void encrypt(String encryptionString);
     }
 }

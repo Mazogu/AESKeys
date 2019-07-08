@@ -18,6 +18,9 @@ import java.security.cert.CertificateException;
 
 import javax.crypto.KeyGenerator;
 
+/**
+ * Class for handling key generation.
+ */
 public class KeyStoreWrapper {
     private static final String MY_ALGORITHM = "AES";
     private static final String KEYSTORE_PROVIDER = "AndroidKeyStore";
@@ -29,6 +32,16 @@ public class KeyStoreWrapper {
         keyStore.load(null);
     }
 
+    /**
+     * Creates a secret key and adds it to the keystore.
+     * @param alias Alias string to generate key
+     * @return
+     * @throws NoSuchProviderException
+     * @throws NoSuchAlgorithmException
+     * @throws InvalidAlgorithmParameterException
+     * @throws KeyStoreException
+     * @throws UnrecoverableKeyException
+     */
     public Key createSecretKey(String alias) throws NoSuchProviderException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, KeyStoreException, UnrecoverableKeyException {
         if(keyStore.containsAlias(alias))
             return keyStore.getKey(alias, null);
@@ -43,6 +56,14 @@ public class KeyStoreWrapper {
         return generator.generateKey();
     }
 
+    /**
+     * Returns key based on the alias.
+     * @param alias
+     * @return Secret Key
+     * @throws UnrecoverableEntryException
+     * @throws NoSuchAlgorithmException
+     * @throws KeyStoreException
+     */
     public Key getKey(String alias) throws UnrecoverableEntryException, NoSuchAlgorithmException, KeyStoreException {
         KeyStore.SecretKeyEntry secretKeyEntry = (KeyStore.SecretKeyEntry) keyStore.getEntry(alias,null);
         return secretKeyEntry.getSecretKey();

@@ -14,9 +14,16 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 
+/**
+ * Handle providing classes that all components will use.
+ */
 @Module
 public class AppModule {
 
+    /**
+     * Creates an instance of the database wrapper.
+     * @return
+     */
     @Singleton
     @Provides
     FirebaseDB providesFireBaseDB(){
@@ -25,9 +32,15 @@ public class AppModule {
         return firebaseDB;
     }
 
+    /**
+     * @return Wrapper for the cipher class.
+     */
     @Provides
     CipherWrapper providesCipherWrapper(){return new CipherWrapper();}
 
+    /**
+     * @return Wrapper for the keystore.
+     */
     @Provides
     KeyStoreWrapper providesKeyStoreWrapper(){
         try {

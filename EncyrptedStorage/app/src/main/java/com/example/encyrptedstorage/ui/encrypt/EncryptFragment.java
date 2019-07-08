@@ -45,6 +45,15 @@ public class EncryptFragment extends Fragment implements EncryptContract.EView{
         return view;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.detachView();
+    }
+
+    /**
+     * Sends text currently in the textview to be encrypted and added to firebase.
+     */
     @OnClick(R.id.encrypt_button)
     public void sendData(){
         String encryptionString = encryption.getText().toString();

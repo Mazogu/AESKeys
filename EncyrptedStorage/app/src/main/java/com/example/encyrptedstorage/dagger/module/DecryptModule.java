@@ -10,6 +10,9 @@ import com.example.encyrptedstorage.ui.decrypt.DecryptPresenter;
 import dagger.Module;
 import dagger.Provides;
 
+/**
+ * Handles providing the presenter for the Decrypt Fragment.
+ */
 @Module
 public class DecryptModule {
 
@@ -19,6 +22,13 @@ public class DecryptModule {
         this.view = view;
     }
 
+    /**
+     * Uses the provides from the AppModule to instantiate the presenter for the Decryption Fragment.
+     * @param database
+     * @param keyStore
+     * @param cipher
+     * @return
+     */
     @DecryptScope
     @Provides
     DecryptContract.DPresenter providesDPresenter(FirebaseDB database, KeyStoreWrapper keyStore, CipherWrapper cipher){

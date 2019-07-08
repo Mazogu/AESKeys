@@ -10,6 +10,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+/**
+ * Wrapper to handle database interactions.
+ */
 public class FirebaseDB {
     private FirebaseDatabase database;
     private DatabaseReference reference;
@@ -17,12 +20,19 @@ public class FirebaseDB {
     private ValueEventListener listener;
     private ChildEventListener childEventListener;
 
+    /**
+     * Initializes database and reference point.
+     */
     public void init(){
         database = FirebaseDatabase.getInstance();
         reference = database.getReference();
     }
 
 
+    /**
+     * Add listeners to communicate with the callback.
+     * @param callBack
+     */
     public void attachCallback(final CallBack callBack){
         this.callBack = callBack;
 
@@ -56,10 +66,17 @@ public class FirebaseDB {
         reference.addChildEventListener(childEventListener);
     }
 
+    /**
+     * Sends text to database.
+     * @param text text to send.
+     */
     public void sendMessage(String text){
         reference.push().setValue(text);
     }
 
+    /**
+     * Removes listeners and callbacks.
+     */
     public void removeListeners(){
         reference.removeEventListener(childEventListener);
         listener = null;
@@ -68,8 +85,17 @@ public class FirebaseDB {
     }
 
     public interface CallBack{
+        /**
+         * Sends data to callback.
+         * @param data
+         * @param Key
+         */
         void retrieveData(String data,String Key);
 
+        /**
+         * Informs callback that an entry should be removed.
+         * @param key
+         */
         void removeData(String key);
     }
 

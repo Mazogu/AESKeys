@@ -9,11 +9,23 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 
+/**
+ * Base component.
+ */
 @Singleton
 @Component(modules = {AppModule.class})
 public interface AppComponent {
 
+    /**
+     * Adds subcomponent for decryption.
+     * @param module
+     * @return
+     */
     DecryptComponent newDecryptComponent(DecryptModule module);
 
+    /**Adds subcomponent for encryption.
+     * @param module
+     * @return
+     */
     EncryptComponent newEncryptComponent(EncryptModule module);
 }

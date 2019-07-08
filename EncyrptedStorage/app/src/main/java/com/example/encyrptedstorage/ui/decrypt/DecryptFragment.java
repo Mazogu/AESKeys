@@ -54,6 +54,12 @@ public class DecryptFragment extends Fragment implements DecryptContract.DView {
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.detachView();
+    }
+
+    @Override
     public void sendError(String s) {
         Toast.makeText(getActivity(), s, Toast.LENGTH_SHORT).show();
     }
