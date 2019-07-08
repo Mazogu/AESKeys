@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "594433108321",
+    "firebase_url": "https://encyrptedstorage.firebaseio.com",
+    "project_id": "encyrptedstorage",
+    "storage_bucket": "encyrptedstorage.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:594433108321:android:61efa005295dd626",
+        "android_client_info": {
+          "package_name": "com.example.encyrptedstorage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "594433108321-q740b395o14i2rv5ls5jbihiuc1verq5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.encyrptedstorage",
+            "certificate_hash": "287d1501da1bf2a863273aff473d4b1ac80814b1"
+          }
+        },
+        {
+          "client_id": "594433108321-jt79isks7iv1ojipafg9os8183vmrkvh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpSJ5EfSeT_JamBIIbt2f9SpfIab4Nmq0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "594433108321-jt79isks7iv1ojipafg9os8183vmrkvh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
