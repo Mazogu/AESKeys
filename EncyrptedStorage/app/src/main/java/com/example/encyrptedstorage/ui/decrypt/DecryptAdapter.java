@@ -14,14 +14,26 @@ import java.util.List;
 public class DecryptAdapter extends RecyclerView.Adapter<DecryptAdapter.DecryptHolder> {
 
     private List<String> items;
+    private List<String> keys;
 
-    public DecryptAdapter(List<String> items){
+    public DecryptAdapter(List<String> items, List<String> keys){
         this.items = items;
+        this.keys = keys;
     }
 
-    public void addEntry(String string){
+    public void addEntry(String string, String key){
         items.add(string);
+        keys.add(key);
         notifyItemInserted(items.size()-1);
+    }
+
+    public void removeEntry(String key){
+        int pos = keys.indexOf(key);
+        if(pos == -1)
+            return;
+        keys.remove(pos);
+        items.remove(pos);
+        notifyItemRemoved(pos);
     }
 
     @NonNull

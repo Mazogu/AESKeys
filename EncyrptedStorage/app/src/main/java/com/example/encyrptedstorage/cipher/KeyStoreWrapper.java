@@ -13,6 +13,7 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.UnrecoverableEntryException;
+import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
 
 import javax.crypto.KeyGenerator;
@@ -28,7 +29,9 @@ public class KeyStoreWrapper {
         keyStore.load(null);
     }
 
-    public Key createSecretKey(String alias) throws NoSuchProviderException, NoSuchAlgorithmException, InvalidAlgorithmParameterException {
+    public Key createSecretKey(String alias) throws NoSuchProviderException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, KeyStoreException, UnrecoverableKeyException {
+        if(keyStore.containsAlias(alias))
+            return keyStore.getKey(alias, null);
         generator = KeyGenerator.getInstance(MY_ALGORITHM, KEYSTORE_PROVIDER);
         KeyGenParameterSpec spec = new KeyGenParameterSpec.Builder(alias, KeyProperties.PURPOSE_ENCRYPT
                 | KeyProperties.PURPOSE_DECRYPT)

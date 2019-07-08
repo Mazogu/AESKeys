@@ -47,7 +47,7 @@ public class DecryptFragment extends Fragment implements DecryptContract.DView {
         View view = inflater.inflate(R.layout.fragment_decrypt, container, false);
         ButterKnife.bind(this,view);
         if(adapter == null)
-            adapter = new DecryptAdapter(new ArrayList<String>());
+            adapter = new DecryptAdapter(new ArrayList<String>(), new ArrayList<String>());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
         return view;
@@ -59,9 +59,15 @@ public class DecryptFragment extends Fragment implements DecryptContract.DView {
     }
 
     @Override
-    public void addEntry(String data) {
+    public void addEntry(String data,String key) {
         if(adapter == null)
-            adapter = new DecryptAdapter(new ArrayList<String>());
-        adapter.addEntry(data);
+            adapter = new DecryptAdapter(new ArrayList<String>(), new ArrayList<String>());
+        adapter.addEntry(data,key);
+    }
+
+    @Override
+    public void removeEntry(String key) {
+        if(adapter != null)
+            adapter.removeEntry(key);
     }
 }

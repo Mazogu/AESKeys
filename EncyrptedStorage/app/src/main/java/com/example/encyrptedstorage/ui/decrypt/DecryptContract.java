@@ -5,7 +5,8 @@ import com.example.encyrptedstorage.ui.BaseView;
 
 public interface DecryptContract {
     interface DView extends BaseView{
-        void addEntry(String data);
+        void addEntry(String data, String key);
+        void removeEntry(String key);
     }
     interface DPresenter extends BasePresenter<DView>{
 

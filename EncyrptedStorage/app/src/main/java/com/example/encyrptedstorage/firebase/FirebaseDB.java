@@ -1,7 +1,9 @@
 package com.example.encyrptedstorage.firebase;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -13,6 +15,7 @@ public class FirebaseDB {
     private DatabaseReference reference;
     private CallBack callBack;
     private ValueEventListener listener;
+    private ChildEventListener childEventListener;
 
     public void init(){
         database = FirebaseDatabase.getInstance();
@@ -20,17 +23,29 @@ public class FirebaseDB {
     }
 
 
-    public void attachCallback(CallBack callBack){
+    public void attachCallback(final CallBack callBack){
         this.callBack = callBack;
-        listener = new ValueEventListener() {
+
+        childEventListener = new ChildEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot node: dataSnapshot.getChildren()) {
-                    String data = node.getValue(String.class);
-                    if(FirebaseDB.this.callBack != null) {
-                        FirebaseDB.this.callBack.retrieveData(data);
-                    }
-                }
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                if(callBack != null)
+                    callBack.retrieveData(dataSnapshot.getValue(String.class),dataSnapshot.getKey());
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                callBack.removeData(dataSnapshot.getKey());
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
             }
 
             @Override
@@ -38,21 +53,24 @@ public class FirebaseDB {
 
             }
         };
-        reference.addValueEventListener(listener);
+        reference.addChildEventListener(childEventListener);
     }
 
     public void sendMessage(String text){
         reference.push().setValue(text);
     }
 
-    public void removeListener(){
-        reference.removeEventListener(listener);
+    public void removeListeners(){
+        reference.removeEventListener(childEventListener);
         listener = null;
+        childEventListener = null;
         callBack = null;
     }
 
     public interface CallBack{
-        void retrieveData(String data);
+        void retrieveData(String data,String Key);
+
+        void removeData(String key);
     }
 
 }

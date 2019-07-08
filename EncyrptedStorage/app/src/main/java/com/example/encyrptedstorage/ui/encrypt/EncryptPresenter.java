@@ -4,6 +4,7 @@ import com.example.encyrptedstorage.cipher.CipherWrapper;
 import com.example.encyrptedstorage.cipher.KeyStoreWrapper;
 import com.example.encyrptedstorage.firebase.FirebaseDB;
 
+import java.io.UnsupportedEncodingException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.Key;
@@ -40,7 +41,8 @@ public class EncryptPresenter implements EncryptContract.EPresenter {
             String coded = cipher.encrypt(encryptionString, key);
             database.sendMessage(coded);
         } catch (NoSuchPaddingException | NoSuchAlgorithmException | NoSuchProviderException | InvalidAlgorithmParameterException
-                | InvalidKeyException | BadPaddingException | IllegalBlockSizeException | KeyStoreException | UnrecoverableEntryException e) {
+                | InvalidKeyException | BadPaddingException | IllegalBlockSizeException | KeyStoreException
+                | UnsupportedEncodingException | UnrecoverableEntryException e) {
             e.printStackTrace();
             view.sendError(String.format("%s occurred. Unable to encrypt",e.getClass().getName()));
         }
@@ -49,6 +51,6 @@ public class EncryptPresenter implements EncryptContract.EPresenter {
     @Override
     public void detachView() {
         view = null;
-        database.removeListener();
+        database.removeListeners();
     }
 }
