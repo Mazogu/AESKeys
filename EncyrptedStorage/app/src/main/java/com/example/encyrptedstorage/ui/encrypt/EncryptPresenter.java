@@ -49,5 +49,6 @@ public class EncryptPresenter implements EncryptContract.EPresenter {
     @Override
     public void detachView() {
         view = null;
+        database.removeListener();
     }
 }

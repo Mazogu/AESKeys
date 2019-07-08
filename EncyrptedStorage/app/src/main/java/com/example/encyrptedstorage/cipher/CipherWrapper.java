@@ -29,7 +29,7 @@ public class CipherWrapper {
         return Base64.encodeToString(encyptedBytes, Base64.DEFAULT);
     }
 
-    public String decrypt(String encrpytedText, Key key) throws InvalidKeyException, BadPaddingException, IllegalBlockSizeException, ShortBufferException, NoSuchAlgorithmException, InvalidAlgorithmParameterException {
+    public String decrypt(String encrpytedText, Key key) throws InvalidKeyException, BadPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, InvalidAlgorithmParameterException {
         cipher.init(Cipher.DECRYPT_MODE,key,getGCMSpec());
         byte[] encryptedBytes = Base64.decode(encrpytedText.getBytes(), Base64.DEFAULT);
         byte[] decryptedBytes = cipher.doFinal(encryptedBytes);
@@ -37,9 +37,9 @@ public class CipherWrapper {
     }
 
     private GCMParameterSpec getGCMSpec() throws NoSuchAlgorithmException {
-        SecureRandom randomSecureRandom = SecureRandom.getInstance("SHA1PRNG");
+        SecureRandom randomSecureRandom = new SecureRandom();
         byte[] iv = new byte[12];
         randomSecureRandom.nextBytes(iv);
-        return new GCMParameterSpec(96, iv);
+        return new GCMParameterSpec(128, iv);
     }
 }
