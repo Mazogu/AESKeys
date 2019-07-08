@@ -66,6 +66,6 @@ public class KeyStoreWrapper {
      */
     public Key getKey(String alias) throws UnrecoverableEntryException, NoSuchAlgorithmException, KeyStoreException {
         KeyStore.SecretKeyEntry secretKeyEntry = (KeyStore.SecretKeyEntry) keyStore.getEntry(alias,null);
-        return secretKeyEntry.getSecretKey();
+        return secretKeyEntry != null  ? secretKeyEntry.getSecretKey() : null;
     }
 }
