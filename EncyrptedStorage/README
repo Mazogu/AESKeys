@@ -1,0 +1,2 @@
+The Key has to match the key used for encrypting the text entry in order to decrypt it later. 
+If a key is generated from another version on the app that key will fail to decode any current data from the data. 
